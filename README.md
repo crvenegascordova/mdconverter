@@ -1,157 +1,222 @@
 # mdconverter 🚀
 
-Una aplicación CLI en **TypeScript / Node.js (Bun)** para leer, escanear e interpretar archivos `.md` (encabezados, párrafos, listas, citas, tablas GFM y bloques de código) y convertirlos automáticamente en documentos **PDF** y **Word (.docx)**.
+**English** | [Español](README.es.md)
+
+A **TypeScript / Node.js (Bun)** CLI application that reads, scans, and parses `.md` files (headings, paragraphs, lists, blockquotes, GFM tables, and code blocks), then automatically converts them to **PDF** and **Word (.docx)** documents.
 
 ---
 
-## 🌟 Características
+## 🌟 Features
 
-- **Interpretación Completa de Markdown**:
-  - 📌 **Encabezados** (`# H1` a `###### H6`) con estilos visuales y jerarquía de tamaños.
-  - ✍️ **Texto enriquecido inline** (negrita, cursiva, tachado, código inline, enlaces web).
-  - 📊 **Tablas GFM** (filas, columnas, cabeceras destacadas, bordes y alineación izquierda/centro/derecha sin desbordar el margen).
-  - 📜 **Listas anidadas** (ordenadas y desordenadas con viñetas multinivel e indentación proporcional).
-  - 💬 **Citas / Blockquotes** con barra lateral estilizada.
-  - 💻 **Bloques de código** formateados con tipografía monoespaciada y contenedor de fondo.
-  - ➖ **Líneas divisorias horizontal** (`---`).
-- **🎨 Temas Visuales Integrados (Sin dependencias nativas)**:
-  - `--theme modern` (predeterminado): Estilo limpio tipo GitHub / Preview (Sans-Serif, acentos de color, zebra striping).
-  - `--theme latex` (académico): Estilo formal tipo LaTeX (Tipografía Serif Times New Roman/Times-Roman, justificado, tablas formato `booktabs` con reglas `\toprule`, `\midrule`, `\bottomrule` y numeración de página `- 1 -`).
-- **100% Multiplataforma**: Ejecución transparente en **Ubuntu / Linux**, **macOS** y **Windows PowerShell**.
-- **Sin dependencias nativas complejas**: No requiere Microsoft Word, ni Chromium, ni TeX/LaTeX preinstalados.
+- **Complete Markdown Parsing**:
+  - 📌 **Headings** (`# H1` through `###### H6`) with visual styles and size hierarchy.
+  - ✍️ **Inline rich text** (bold, italic, strikethrough, inline code, and web links).
+  - 📊 **GFM tables** (rows, columns, highlighted headers, borders, left/center/right alignment, and margin overflow prevention).
+  - 📜 **Nested lists** (ordered and unordered, with multilevel bullets and proportional indentation).
+  - 💬 **Blockquotes** with a styled side bar.
+  - 💻 **Code blocks** formatted with a monospace font and background container.
+  - ➖ **Horizontal rules** (`---`).
+- **🎨 Built-in Visual Themes (No Native Dependencies)**:
+  - `--theme modern` (default): Clean GitHub/Preview-like style (sans-serif, color accents, and zebra striping).
+  - `--theme latex` (academic): Formal LaTeX-like style (Times New Roman/Times-Roman serif font, justified text, `booktabs`-style tables using `\toprule`, `\midrule`, and `\bottomrule`, plus `- 1 -` page numbering).
+- **100% Cross-platform**: Works on **Ubuntu/Linux**, **macOS**, and **Windows PowerShell**.
+- **No complex native dependencies**: Microsoft Word, Chromium, and TeX/LaTeX are not required.
 
 ---
 
-## ⚡ Instalación Global Automatizada
+## ✅ Requirements
 
-Puedes instalar `mdconverter` para que esté disponible de forma global en tu consola desde **cualquier directorio**:
+To install dependencies and run the project from source, you need one of these runtimes:
 
-### Linux (Ubuntu/Debian/Arch) y macOS
-Ejecuta el script automatizado de instalación:
+- **Bun**: the recommended alternative to Node.js/npm and **required to compile a standalone binary** with `bun run build`.
+- **Node.js** (includes `npm`): a compatible alternative for installation, execution, and testing.
+
+### Install Bun (recommended)
+
+On Linux or macOS:
+
+```bash
+curl -fsSL https://bun.sh/install | bash
+```
+
+On Windows PowerShell:
+
+```powershell
+powershell -c "irm bun.sh/install.ps1|iex"
+```
+
+Close and reopen your terminal after the installation. Verify it with:
+
+```bash
+bun --version
+```
+
+### Alternative: install Node.js
+
+On Linux or macOS, using `nvm`:
+
+```bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+nvm install --lts
+```
+
+On Windows PowerShell, using `winget`:
+
+```powershell
+winget install OpenJS.NodeJS.LTS
+```
+
+Verify it with:
+
+```bash
+node --version
+npm --version
+```
+
+If you use a precompiled binary from `dist/mdconverter`, Node.js and Bun are not needed on the target machine.
+
+---
+
+## ⚡ Automated Global Installation
+
+You can install `mdconverter` to make it available globally from **any directory**. To run these installers, **Node.js/npm or Bun** must already be installed:
+
+- With **Node.js**, Node must remain installed to run the tool.
+- With **Bun**, a standalone binary is compiled; after installation, that binary does not require Node.js or Bun.
+
+### Linux (Ubuntu/Debian/Arch) and macOS
+
+Run the automated installation script:
 
 ```bash
 ./install.sh
-# O alternativamente usando npm / bun:
+# Or alternatively through npm / Bun:
 npm run install:global
 ```
 
 ### Windows (PowerShell)
-Ejecuta el script de PowerShell:
+
+Run the PowerShell script:
 
 ```powershell
 .\install.ps1
 ```
 
-Una vez ejecutado, puedes invocar `mdconverter` desde cualquier ubicación en tu sistema:
+After installation, you can run `mdconverter` from any location:
+
 ```bash
-mdconverter mi_documento.md -f all
+mdconverter my_document.md -f all
 ```
 
 ---
 
-## 🚀 Uso de la CLI
+## 🚀 CLI Usage
 
-### Convertir con Tema Moderno (Por defecto)
+### Convert with the Modern Theme (Default)
+
 ```bash
 mdconverter sample.md -f all
 ```
 
-### Convertir con Tema Académico / LaTeX (`--theme latex`)
+### Convert with the Academic / LaTeX Theme (`--theme latex`)
+
 ```bash
 mdconverter sample.md -t latex -f all
 ```
 
-### Especificar archivo de salida y formato
-```bash
-# Exportar solo PDF estilo LaTeX:
-mdconverter sample.md -t latex -f pdf -o reporte_academico.pdf
+### Specify an output file and format
 
-# Exportar solo DOCX estilo LaTeX:
-mdconverter sample.md -t latex -f docx -o reporte_academico.docx
+```bash
+# Export only a LaTeX-styled PDF:
+mdconverter sample.md -t latex -f pdf -o academic_report.pdf
+
+# Export only a LaTeX-styled DOCX:
+mdconverter sample.md -t latex -f docx -o academic_report.docx
 ```
 
 ---
 
-## 🧪 Pruebas Automatizadas (Suite de Test)
+## 🧪 Automated Tests
 
-El proyecto incluye una estructura de pruebas en `test/samples/` para verificar la precisión del renderizado y conversión en PDF y DOCX tanto en tema `modern` como `latex`:
+The project includes test files in `test/samples/` to validate PDF and DOCX rendering and conversion accuracy for both `modern` and `latex` themes:
 
 ```bash
-# Ejecutar la suite de pruebas completa:
+# Run the complete test suite:
 bun run test
-# O usando npm:
+# Or with npm:
 npm test
 ```
 
-### Archivos de Prueba en `test/samples/`:
-- `01_basic_syntax.md`: Sintaxis básica, encabezados H1-H6, formatos inline y listas.
-- `02_complex_tables.md`: Tablas con alineaciones, texto en celdas, rutas largas y múltiples filas.
-- `03_images_and_figures.md`: Figuras locales (`../assets/sample.png`), remotas y bloques `<figure>`.
-- `04_math_and_latex.md`: Ecuaciones matemáticas en línea (`$...$`) y bloques (`$$...$$`).
-- `05_edge_cases.md`: Unicode, acentos, emojis, citas anidadas y enlaces complejos.
+### Test files in `test/samples/`
+
+- `01_basic_syntax.md`: Basic syntax, H1-H6 headings, inline formatting, and lists.
+- `02_complex_tables.md`: Tables with alignment, text in cells, long paths, and multiple rows.
+- `03_images_and_figures.md`: Local (`../assets/sample.png`) and remote images, plus `<figure>` blocks.
+- `04_math_and_latex.md`: Inline (`$...$`) and block (`$$...$$`) mathematical equations.
+- `05_edge_cases.md`: Unicode, accented characters, emojis, nested quotes, and complex links.
 
 ---
 
-## 🛠️ Desarrollo e Instalación Local
+## 🛠️ Local Development and Installation
 
-### Usando Bun (Recomendado)
+### Using Bun (Recommended)
 
 ```bash
-# Instalar dependencias
+# Install dependencies
 bun install
 
-# Ejecutar conversión local
+# Run a local conversion
 bun run mdconverter sample.md -f all
 ```
 
-### Usando Node.js / npm
+### Using Node.js / npm
 
 ```bash
-# Instalar dependencias
+# Install dependencies
 npm install
 
-# Ejecutar conversión local
+# Run a local conversion
 npm run mdconverter sample.md -f all
 ```
 
 ---
 
-## 📦 Compilación a Ejecutable Único (Standalone Binary)
+## 📦 Compile a Standalone Binary
 
-Puedes generar un binario ejecutable único que no requiere tener Node ni Bun instalado en la máquina destino:
+With **Bun** installed, you can generate a standalone executable that does not require Node.js or Bun on the target machine:
 
 ```bash
 bun run build
 ```
 
-Esto generará el ejecutable en `dist/mdconverter`.
+This generates the executable at `dist/mdconverter`.
 
 ---
 
-## 📂 Estructura del Proyecto
+## 📂 Project Structure
 
-```
+```text
 mdconverter/
 ├── src/
-│   ├── index.ts          # Punto de entrada CLI (Argumentos, temas y banderas)
-│   ├── parser.ts         # Escáner y Parser AST con Marked
+│   ├── index.ts          # CLI entry point (arguments, themes, and flags)
+│   ├── parser.ts         # Scanner and AST parser using Marked
 │   └── converters/
-│       ├── docx.ts       # Motor de conversión a Word (.docx) con temas
-│       └── pdf.ts        # Motor de conversión a PDF (pdfmake) con temas
+│       ├── docx.ts       # Word conversion engine with themes
+│       └── pdf.ts        # PDF conversion engine with themes
 ├── test/
 │   ├── assets/
-│   │   └── sample.png    # Activos gráficos para pruebas
+│   │   └── sample.png    # Test image asset
 │   ├── samples/
 │   │   ├── 01_basic_syntax.md
 │   │   ├── 02_complex_tables.md
 │   │   ├── 03_images_and_figures.md
 │   │   ├── 04_math_and_latex.md
 │   │   └── 05_edge_cases.md
-│   └── run_tests.test.ts # Runner automatizado de la suite de pruebas
-├── install.sh            # Script de instalación global para Linux / macOS
-├── install.ps1           # Script de instalación global para Windows PowerShell
-├── sample.md             # Archivo Markdown de prueba
-├── package.json          # Configuración y dependencias
-├── tsconfig.json         # Configuración de TypeScript
-└── README.md             # Documentación
-```
+│   └── run_tests.test.ts # Automated test-suite runner
+├── install.sh            # Global installation script for Linux / macOS
+├── install.ps1           # Global installation script for Windows PowerShell
+├── sample.md             # Sample Markdown file
+├── package.json          # Project configuration and dependencies
+├── tsconfig.json         # TypeScript configuration
+├── README.md             # English documentation
+└── README.es.md          # Spanish documentation

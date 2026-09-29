@@ -1,6 +1,6 @@
 # mdconverter 🚀
 
-**English** | [Español](README.es.md)
+**English** | [Español](README.es.md) | [Español (Chile)](README.CL.md)
 
 A **TypeScript / Node.js (Bun)** CLI application that reads, scans, and parses `.md` files (headings, paragraphs, lists, blockquotes, GFM tables, and code blocks), then automatically converts them to **PDF** and **Word (.docx)** documents.
 
@@ -219,4 +219,5 @@ mdconverter/
 ├── package.json          # Project configuration and dependencies
 ├── tsconfig.json         # TypeScript configuration
 ├── README.md             # English documentation
-└── README.es.md          # Spanish documentation
+├── README.es.md          # Spanish documentation
+└── README.CL.md          # Chilean Spanish documentation

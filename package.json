@@ -1,0 +1,31 @@
+{
+  "name": "mdconverter",
+  "version": "1.0.0",
+  "description": "CLI tool to parse Markdown files (headings, tables, lists, code blocks, etc.) and convert them to PDF and DOCX.",
+  "main": "src/index.ts",
+  "bin": {
+    "mdconverter": "./src/index.ts"
+  },
+  "type": "module",
+  "scripts": {
+    "start": "tsx src/index.ts",
+    "mdconverter": "tsx src/index.ts",
+    "build": "tsc && bun build ./src/index.ts --compile --outfile dist/mdconverter 2>/dev/null || tsc",
+    "install:global": "bash install.sh",
+    "test": "tsx test/run_tests.test.ts",
+    "test:sample": "tsx src/index.ts sample.md -f all"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "commander": "^12.1.0",
+    "docx": "^8.5.0",
+    "marked": "^14.1.2",
+    "pdfmake": "^0.2.10"
+  },
+  "devDependencies": {
+    "@types/node": "^22.5.4",
+    "@types/pdfmake": "^0.2.9",
+    "tsx": "^4.23.15",
+    "typescript": "^5.5.4"
+  }
+}
